@@ -16,7 +16,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 // Set port for express web server
-app.set('port', 3000);
+app.set('port', 80);
 
 // Connect to MongoDB database "beerFavs" via mongoose
 mongoose.connect('mongodb://localhost/beerFavs');
