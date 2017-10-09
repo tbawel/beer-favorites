@@ -16,11 +16,13 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 // Set port for express web server
-app.set('port', 80);
+var port = process.env.PORT || 3000;
+app.set('port', port);
 
 // Connect to MongoDB database "beerFavs" via mongoose
-mongoose.connect('mongodb://localhost/beerFavs');
-var db = mongoose.connection;
+var promise = mongoose.connect('mongodb://localhost/myapp', {
+  useMongoClient: true,
+});
 
 // Non-API call to base URL (http://localhost:3000)
 app.get('/', (req, res) => {
