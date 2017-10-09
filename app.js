@@ -16,11 +16,11 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 // Set port for express web server
-var port = process.env.PORT || 3000;
+var port = process.env.PORT || 3000; // process.env.PORT used to determine right port for Heroku deployment
 app.set('port', port);
 
-// Connect to MongoDB database "beerFavs" via mongoose
-var promise = mongoose.connect('mongodb://localhost/myapp', {
+// Connect to MLab MongoDB database "beerFavs" via mongoose
+var promise = mongoose.connect('mongodb://admin:RHyudhovtitsOs5@ds113795.mlab.com:13795/beerfavs', {
   useMongoClient: true,
 });
 
