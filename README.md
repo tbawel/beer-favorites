@@ -9,4 +9,3 @@ Simple CRUD application to keep track of my favorite beers
 - Node/Express
 - MongoDB/Mongoose/MLab
 - Heroku
-
