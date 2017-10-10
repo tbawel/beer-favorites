@@ -15,6 +15,9 @@ var app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
+// Serve up ./public folder
+app.use(express.static('public'));
+
 // Set port for express web server
 var port = process.env.PORT || 3000; // process.env.PORT used to determine right port for Heroku deployment
 app.set('port', port);
