@@ -1,15 +1,37 @@
-var axios = require('axios');
+class BeerList extends React.Component {
 
-document.onreadystatechange = () => {
-  if (document.readyState === 'complete') {
-    console.log('Document Ready');
-
-    axios.get('/api/beers')
-    .then(function (response) {
-      console.log(response);
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
+  constructor() {
+    super();
+    this.state = {
+      beers: []
+    };
   }
-};
+
+  componentWillMount() {
+    axios.get('/api/beers')
+      .then((response) => {
+        this.setState({
+          beers: response.data
+        })
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
+  render() {
+    return (
+      <ul>
+        { this.state.beers.map( (beer) => {
+            return <li>{ beer.name }</li>
+          })
+        }
+      </ul>
+    );
+  }
+}
+
+ReactDOM.render(
+  <BeerList />,
+  document.getElementById('beers')
+);
