@@ -20,12 +20,13 @@ class BeerList extends React.Component {
   }
 
   render() {
+    let beerItems = this.state.beers.map( (beer) => {
+      return <li>{ beer.name }</li>
+    });
+    
     return (
       <ul>
-        { this.state.beers.map( (beer) => {
-            return <li>{ beer.name }</li>
-          })
-        }
+        { beerItems }
       </ul>
     );
   }
