@@ -1,6 +1,7 @@
 {
   "db": {
+    "url": "mongodb://admin:RHyudhovtitsOs5@ds113795.mlab.com:13795/beerfavs",
     "name": "db",
-    "connector": "memory"
+    "connector": "mongodb"
   }
 }
