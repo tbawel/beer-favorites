@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
+import BeerItem from './BeerItem';
+
 class App extends Component {
   constructor() {
     super();
@@ -23,7 +25,7 @@ class App extends Component {
 
   render() {
     let beerItems = this.state.beers.map( (beer) => {
-      return <li key={ beer.id }>{ beer.name }</li>
+      return <BeerItem key={ beer.id } beerItem={ beer }/>;
     });
 
     return (
