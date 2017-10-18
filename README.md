@@ -83,4 +83,4 @@ All the CRUD operations above should persist in your mLab database
 
 
 ## General Notes
-Commit & push to your new branch often, especially after the first set up steps!
+Commit & push to your new branch often, especially after the first set up steps.
