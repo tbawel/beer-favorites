@@ -23,9 +23,33 @@ class App extends Component {
       });
   }
 
+  deleteBeer(id) {
+    // let remainder = this.state.beers.filter((beer) => {
+    //   if(beer.id !== id) {
+    //     return beer;
+    //   }
+    // });
+
+    console.log(id);
+
+    // this.setState({
+    //   beers: remainder
+    // })
+
+    // axios.delete('/api/beers/' + id)
+		// .then((response) => {
+		// 	this.setState({
+		// 		beers: remainder
+		// 	})
+		// })
+		// .catch((error) => {
+		// 	console.log(error);
+		// });
+  }
+
   render() {
     let beerItems = this.state.beers.map( (beer) => {
-      return <BeerItem key={ beer.id } beerItem={ beer }/>;
+      return <BeerItem key={ beer.id } beerItem={ beer } onDelete={ this.deleteBeer.bind(this) }/>;
     });
 
     return (
