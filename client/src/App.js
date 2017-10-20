@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
-import BeerItem from './BeerItem';
-
 class App extends Component {
   constructor() {
     super();
@@ -37,28 +35,26 @@ class App extends Component {
     // })
 
     // axios.delete('/api/beers/' + id)
-		// .then((response) => {
-		// 	this.setState({
-		// 		beers: remainder
-		// 	})
-		// })
-		// .catch((error) => {
-		// 	console.log(error);
-		// });
+    // .then((response) => {
+    // 	this.setState({
+    // 		beers: remainder
+    // 	})
+    // })
+    // .catch((error) => {
+    // 	console.log(error);
+    // });
   }
 
   render() {
-    let beerItems = this.state.beers.map( (beer) => {
-      return <BeerItem key={ beer.id } beerItem={ beer } onDelete={ this.deleteBeer.bind(this) }/>;
+
+    let beerItems = this.state.beers.map((beer) => {
+      return <li key={beer.id}>{beer.name}</li>
     });
 
     return (
-      <div>
-        <header>
-          <h1>Georgie's Favorite Beers</h1>
-        </header>
-        <ul> { beerItems } </ul>
-      </div>
+      <ul>
+        {beerItems}
+      </ul>
     );
   }
 }
