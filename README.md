@@ -15,7 +15,7 @@ npm install -g loopback-cli
 ```
 lb
 ```  
-see LoopBack docs[Getting Started](http://loopback.io/getting-started/)
+see LoopBack docs - [Getting Started](http://loopback.io/getting-started/)
 
 5. Add your current mLab MongoDB database asa data source
 ```
@@ -73,12 +73,13 @@ see React Docs - [Proxying API Requests in Development](https://github.com/faceb
 Build the front-end for your app using React:
 - Main component should render a list of the names (first property) of your data in your mLab database
 - Add a "Delete" button next to every list item, which when clicked deletes the list item
-- Add a form underneath your list, which when submitted adds new item to the list
+- Add a form underneath the list, which when submitted adds new item to the list
 - Wrap every list item in a link, which when clicked takes the user to a detail page of the item, which displayes all properties of the item (Google Tip: React Router)
 - Add a "Edit" button under your item details, which when clicked takes the user to a form where the item can be edited
 
 All the CRUD operations above should persist in your mLab database
 
+- Use React Components whereever abstraction can be beneficial
 - Integrate user authentication for creating, updating and deleting items into your app
 - Integrate a CSS framework into your app i.e. Bootstrap, Foundation, etc.
 
