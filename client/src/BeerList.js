@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 class BeerList extends Component {
@@ -79,7 +80,7 @@ class BeerList extends Component {
     let beerItems = this.state.beers.map((beer) => {
       return (
         <li key={beer.id}>
-          {beer.name}
+          <Link to={ '/beers/' + beer.id }>{beer.name}</Link>
           {/* <button onClick={ this.deleteBeer.bind(this, beer.id) }>Delete</button> */}
           <button onClick={ (e) => this.deleteBeer(beer.id, e) }>Delete</button>
         </li>
