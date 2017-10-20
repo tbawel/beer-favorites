@@ -32,6 +32,7 @@ class BeerDetails extends Component {
           <li>Brewery: { this.state.details.brewery }</li>
           <li>Alochol Content: { this.state.details.alcoholContent }</li>
         </ul>
+        <button onClick={ (e) => this.props.history.push('/') }>Back</button>
       </div>
     );
   }
