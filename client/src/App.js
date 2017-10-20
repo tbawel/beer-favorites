@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-
-import Navigation from './Navigation';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import BeerList from './BeerList';
 
 class App extends Component {
   
@@ -8,7 +8,11 @@ class App extends Component {
   render() {
 
     return (
-      <Navigation />
+			<BrowserRouter>
+				<Switch>
+					<Route exact path='/' component={BeerList} />
+				</Switch>
+			</BrowserRouter>
     );
   }
 }
