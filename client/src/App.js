@@ -96,7 +96,7 @@ class App extends Component {
           <input id="newBeerName" ref="name" name="name" type="text"/><br/>
           <label id="newBeerBrewery">Brewery:</label>
           <input id="newBeerBrewery" ref="brewery" name="brewery" type="text"/><br/>
-          <label id="newBeerAlcoholContent">Name:</label>
+          <label id="newBeerAlcoholContent">Alcohol Content:</label>
           <input id="newBeerAlcoholContent" ref="alcoholContent" name="alcoholContent" type="number"/><br/>
           <button>Add Beer</button>
         </form>
