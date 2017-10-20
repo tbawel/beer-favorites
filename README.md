@@ -71,18 +71,20 @@ see React Docs - [Proxying API Requests in Development](https://github.com/faceb
 ## To Do
 
 Build the front-end for your app using React:
-- Main component should render a list of the names (first property) of your data in your mLab database
+- App component should render a list of the names (first property) of your data in your mLab database
 - Add a "Delete" button next to every list item, which when clicked deletes the list item
 - Add a form underneath the list, which when submitted adds new item to the list
-- Wrap every list item in a link, which when clicked takes the user to a detail page of the item, which displayes all properties of the item (Google Tip: React Router)
+- Create a new component for your current list and form
+- Create a router (Code Along)
+- Create a detail component which displayes all properties of an item 
+- Wrap every list item in a link, which when clicked takes the user to the designated detail page
 - Add a "Edit" button under your item details, which when clicked takes the user to a form where the item can be edited
 
 All the CRUD operations above should persist in your mLab database
 
 - Use React Components whereever abstraction can be beneficial
-- Integrate user authentication for creating, updating and deleting items into your app
 - Integrate a CSS framework into your app i.e. Bootstrap, Foundation, etc.
-
+- Integrate user authentication for creating, updating and deleting items into your app
 
 ## General Notes
 Commit & push to your new branch often, especially after the first set up steps.
