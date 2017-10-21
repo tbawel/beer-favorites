@@ -38,5 +38,9 @@
   "beer": {
     "dataSource": "db",
     "public": true
+  },
+  "brewery": {
+    "dataSource": "db",
+    "public": true
   }
 }

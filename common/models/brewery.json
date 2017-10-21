@@ -1,24 +1,25 @@
 {
-  "name": "beer",
+  "name": "brewery",
   "base": "PersistedModel",
   "idInjection": true,
   "options": {
     "validateUpsert": true
-  },
-  "mongodb": {
-    "collection": "beers"
   },
   "properties": {
     "name": {
       "type": "string",
       "required": true
     },
-    "brewery": {
+    "street": {
       "type": "string",
       "required": true
     },
-    "alcoholContent": {
-      "type": "number",
+    "city": {
+      "type": "string",
+      "required": true
+    },
+    "state": {
+      "type": "string",
       "required": true
     }
   },

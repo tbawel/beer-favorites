@@ -31,8 +31,6 @@ class BeerList extends Component {
    */
   deleteBeer(id) {
 
-    console.log('hit');
-
     // save remainding beers in variable (array)
     let remaindingBeers = this.state.beers.filter((beer) => {
       if(beer.id !== id) {
@@ -84,7 +82,7 @@ class BeerList extends Component {
     let beerItems = this.state.beers.map((beer) => {
       return (
         <li key={beer.id}>
-          <Link to={ '/beers/' + beer.id }>{beer.name}</Link>
+          <Link to={ '/beers/' + beer.id }>{beer.name}</Link>, { beer.brewery }
           <button onClick={ this.deleteBeer.bind(this, beer.id) }>Delete</button>
         </li>
       )
