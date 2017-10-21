@@ -69,26 +69,25 @@ class BeerList extends Component {
   addBeer(e) {
     e.preventDefault(); // prevent default behavior of refreshing page
 
-    console.log(this.state);
     // POST API request, 2nd parameter = new beer object
-    // axios.post('/api/beers/', {
-    //   name: this.state.newBeer.name,
-    //   brewery: this.state.newBeer.brewery,
-    //   alcoholContent: this.state.newBeer.alcoholContent
-    // })
-    // .then((response) => { // successfull api call = beer added to mongodb database
+    axios.post('/api/beers/', {
+      name: this.state.name,
+      brewery: this.state.brewery,
+      alcoholContent: this.state.alcoholContent
+    })
+    .then((response) => { // successfull api call = beer added to mongodb database
 
-    //   let updatedBeers = this.state.beers; // never manipulate state directly => create local variable (updatedBeers)
-    //   updatedBeers.push(response.data); // add new beer (response.data) to updatedBeers array
+      let updatedBeers = this.state.beers; // never manipulate state directly => create local variable (updatedBeers)
+      updatedBeers.push(response.data); // add new beer (response.data) to updatedBeers array
 
-    //   // set state again after successful api call
-    // 	this.setState({
-    // 		beers: updatedBeers
-    // 	})
-    // })
-    // .catch((error) => { 
-    // 	console.log(error);
-    // });
+      // set state again after successful api call
+    	this.setState({
+    		beers: updatedBeers
+    	})
+    })
+    .catch((error) => { 
+    	console.log(error);
+    });
   }
 
   render() {
