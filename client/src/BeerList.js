@@ -31,8 +31,6 @@ class BeerList extends Component {
    */
   deleteBeer(id) {
 
-    console.log('hit');
-
     // save remainding beers in variable (array)
     let remaindingBeers = this.state.beers.filter((beer) => {
       if(beer.id !== id) {
