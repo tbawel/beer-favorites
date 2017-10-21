@@ -1,19 +1,16 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import BeerAddForm from './BeerAddForm';
 
 class BeerList extends Component {
   constructor() {
     super();
     this.state = {
-      beers: [],
-      name: '',
-      brewery: '',
-      alcoholContent: 0
+      beers: []
     }
 
     this.addBeer = this.addBeer.bind(this);
-    this.handleInputChange = this.handleInputChange.bind(this);
   }
 
   componentWillMount() {
@@ -54,26 +51,16 @@ class BeerList extends Component {
     });
   }
 
-  /**
-   * Update properties on every key up
-   */
-  handleInputChange(e) {
-    this.setState({     
-        [e.target.name]: e.target.value     
-    });
-  }
-
   /* Gets called when user clicks "Add Beer" button
    * via JS native onSubmit form event handler
    */
-  addBeer(e) {
-    e.preventDefault(); // prevent default behavior of refreshing page
+  addBeer(newName, newBrewery, newAlcoholContent) {
 
     // POST API request, 2nd parameter = new beer object
     axios.post('/api/beers/', {
-      name: this.state.name,
-      brewery: this.state.brewery,
-      alcoholContent: this.state.alcoholContent
+      name: newName,
+      brewery: newBrewery,
+      alcoholContent: newAlcoholContent
     })
     .then((response) => { // successfull api call = beer added to mongodb database
 
@@ -95,7 +82,7 @@ class BeerList extends Component {
     let beerItems = this.state.beers.map((beer) => {
       return (
         <li key={beer.id}>
-          <Link to={ '/beers/' + beer.id }>{beer.name}</Link>
+          {beer.name}
           <button onClick={ this.deleteBeer.bind(this, beer.id) }>Delete</button>
         </li>
       )
@@ -106,15 +93,7 @@ class BeerList extends Component {
         <ul>
           {beerItems}
         </ul>
-        <form onSubmit={ this.addBeer }>
-          <label id="newBeerName">Name:</label>
-          <input id="newBeerName" name="name" type="text" onChange={ this.handleInputChange }/><br/>
-          <label id="newBeerBrewery">Brewery:</label>
-          <input id="newBeerBrewery" name="brewery" type="text" onChange={ this.handleInputChange }/><br/>
-          <label id="newBeerAlcoholContent">Alcohol Content:</label>
-          <input id="newBeerAlcoholContent" name="alcoholContent" type="number" onChange={ this.handleInputChangeA }/><br/>
-          <button>Add Beer</button>
-        </form>
+        <BeerAddForm onAddBeer={ this.addBeer }/>
       </div>
     );
   }
