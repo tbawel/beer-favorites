@@ -13,9 +13,7 @@ class BeerList extends Component {
     }
 
     this.addBeer = this.addBeer.bind(this);
-    this.handleInputChangeName = this.handleInputChangeName.bind(this);
-    this.handleInputChangeBrewery = this.handleInputChangeBrewery.bind(this);
-    this.handleInputChangeAlcContent = this.handleInputChangeAlcContent.bind(this);
+    this.handleInputChange = this.handleInputChange.bind(this);
   }
 
   componentWillMount() {
@@ -59,25 +57,9 @@ class BeerList extends Component {
   /**
    * Update properties on every key up
    */
-  handleInputChangeName(e) {
-    this.setState({
-        
-          name: e.target.value
-        
-    });
-  }
-  handleInputChangeBrewery(e) {
-    this.setState({
-        
-          brewery: e.target.value
-        
-    });
-  }
-  handleInputChangeAlcContent(e) {
-    this.setState({
-        
-          alcoholContent: e.target.value
-        
+  handleInputChange(e) {
+    this.setState({     
+        [e.target.name]: e.target.value     
     });
   }
 
@@ -127,11 +109,11 @@ class BeerList extends Component {
         </ul>
         <form onSubmit={ this.addBeer }>
           <label id="newBeerName">Name:</label>
-          <input id="newBeerName" name="name" type="text" onChange={ this.handleInputChangeName }/><br/>
+          <input id="newBeerName" name="name" type="text" onChange={ this.handleInputChange }/><br/>
           <label id="newBeerBrewery">Brewery:</label>
-          <input id="newBeerBrewery" name="brewery" type="text" onChange={ this.handleInputChangeBrewery }/><br/>
+          <input id="newBeerBrewery" name="brewery" type="text" onChange={ this.handleInputChange }/><br/>
           <label id="newBeerAlcoholContent">Alcohol Content:</label>
-          <input id="newBeerAlcoholContent" name="alcoholContent" type="number" onChange={ this.handleInputChangeAlcContent }/><br/>
+          <input id="newBeerAlcoholContent" name="alcoholContent" type="number" onChange={ this.handleInputChangeA }/><br/>
           <button>Add Beer</button>
         </form>
       </div>
