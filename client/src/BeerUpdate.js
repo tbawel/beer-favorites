@@ -10,6 +10,7 @@ class BeerUpdate extends Component {
       brewery: '',
       alcoholContent: 0
     }
+    this.updateBeer = this.updateBeer.bind(this);
   }
 
   componentDidMount() {
@@ -65,7 +66,7 @@ class BeerUpdate extends Component {
     return (
       <div>
         <h3>Update Beer</h3>
-        <form onSubmit={ (e) => this.updateBeer(e) }>
+        <form onSubmit={ this.updateBeer }>
           <label id="updateBeerName">Name:</label>
           <input id="updateBeerName" value={ this.state.name } name="name" ref="name" type="text" onChange={ (e) => this.handleInputChange(e) }/><br/>
           <label id="updateBeerBrewery">Brewery:</label>

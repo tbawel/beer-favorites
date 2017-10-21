@@ -8,6 +8,8 @@ class BeerList extends Component {
     this.state = {
       beers: []
     }
+
+    this.addBeer = this.addBeer.bind(this);
   }
 
   componentWillMount() {
@@ -28,6 +30,8 @@ class BeerList extends Component {
    * via the JS native onClick event handler
    */
   deleteBeer(id) {
+
+    console.log('hit');
 
     // save remainding beers in variable (array)
     let remaindingBeers = this.state.beers.filter((beer) => {
@@ -81,8 +85,7 @@ class BeerList extends Component {
       return (
         <li key={beer.id}>
           <Link to={ '/beers/' + beer.id }>{beer.name}</Link>
-          {/* <button onClick={ this.deleteBeer.bind(this, beer.id) }>Delete</button> */}
-          <button onClick={ (e) => this.deleteBeer(beer.id, e) }>Delete</button>
+          <button onClick={ this.deleteBeer.bind(this, beer.id) }>Delete</button>
         </li>
       )
     });
@@ -92,7 +95,7 @@ class BeerList extends Component {
         <ul>
           {beerItems}
         </ul>
-        <form onSubmit={ (e) => this.addBeer(e) }>
+        <form onSubmit={ this.addBeer }>
           <label id="newBeerName">Name:</label>
           <input id="newBeerName" ref="name" name="name" type="text"/><br/>
           <label id="newBeerBrewery">Brewery:</label>
