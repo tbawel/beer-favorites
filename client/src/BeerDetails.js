@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 class BeerDetails extends Component {
@@ -32,7 +33,8 @@ class BeerDetails extends Component {
           <li>Brewery: { this.state.details.brewery }</li>
           <li>Alochol Content: { this.state.details.alcoholContent }</li>
         </ul>
-        <button onClick={ (e) => this.props.history.push('/') }>Back</button>
+        <Link to='/'><button>Back</button></Link>
+        <Link to={ '/beers/update/' + this.state.details.id }><button>Edit</button></Link>
       </div>
     );
   }
