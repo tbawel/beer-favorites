@@ -11,6 +11,7 @@ class BeerUpdate extends Component {
       alcoholContent: 0
     }
     this.updateBeer = this.updateBeer.bind(this);
+    this.handleInputChange = this.handleInputChange.bind(this);
   }
 
   componentDidMount() {
@@ -68,11 +69,11 @@ class BeerUpdate extends Component {
         <h3>Update Beer</h3>
         <form onSubmit={ this.updateBeer }>
           <label id="updateBeerName">Name:</label>
-          <input id="updateBeerName" value={ this.state.name } name="name" ref="name" type="text" onChange={ (e) => this.handleInputChange(e) }/><br/>
+          <input id="updateBeerName" value={ this.state.name } name="name" ref="name" type="text" onChange={ this.handleInputChange }/><br/>
           <label id="updateBeerBrewery">Brewery:</label>
-          <input id="updateBeerBrewery" value={ this.state.brewery } name="brewery" ref="brewery" type="text" onChange={ (e) => this.handleInputChange(e) }/><br/>
+          <input id="updateBeerBrewery" value={ this.state.brewery } name="brewery" ref="brewery" type="text" onChange={ this.handleInputChange }/><br/>
           <label id="updateBeerAlcoholContent">Alcohol Content:</label>
-          <input id="updateBeerAlcoholContent" value={ this.state.alcoholContent } name="alcoholContent" ref="alcoholContent" type="number" onChange={ (e) => this.handleInputChange(e) }/><br/>
+          <input id="updateBeerAlcoholContent" value={ this.state.alcoholContent } name="alcoholContent" ref="alcoholContent" type="number" onChange={ this.handleInputChange }/><br/>
           <button>Update Beer</button>
         </form>
         <Link to={ '/beers/' + this.props.match.params.id }> <button>Back</button></Link>
