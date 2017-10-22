@@ -82,7 +82,7 @@ class BeerList extends Component {
     let beerItems = this.state.beers.map((beer) => {
       return (
         <li key={beer.id}>
-          <Link to={'beers/' + beer.id }>{beer.name}</Link>
+          <Link to={'/beers/' + beer.id }>{beer.name}</Link>
           <button onClick={ this.deleteBeer.bind(this, beer.id) }>Delete</button>
         </li>
       )

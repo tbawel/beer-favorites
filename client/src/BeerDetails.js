@@ -11,6 +11,7 @@ class BeerDetails extends Component {
   }
 
   componentDidMount() {
+    console.log('hit');
 
     // API GET request => get beer by Id
     axios.get('/api/beers/' + this.props.match.params.id)
