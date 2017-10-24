@@ -19,14 +19,24 @@ class Login extends Component {
     });
   }
 
+  /**
+   * Gets called when user submits form via "Login" button
+   * using the JS native onSubmit form event handler
+   */
   login(event) {
-		event.preventDefault()
+    event.preventDefault(); // prevent browser-standard of reloading page on form submit
+    
+    // POST API request to login user
     axios.post('/api/Users/login', {
 			username: this.state.username,
 			password: this.state.password
 		})
-    .then((response) => {
-			this.props.onLogin(response.data.id);
+    .then((response) => { // successful api call
+
+      /* Use the method of the parent component "App" which has been passed down
+       * via the onLogin property (this.props)
+       */
+			this.props.onLogin(response.data.id); 
     })
     .catch((error) => {
     	console.log(error);
