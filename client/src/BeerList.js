@@ -40,16 +40,21 @@ class BeerList extends Component {
       }
     });
 
-    // API Delete request
-    axios.delete('/api/beers/' + id)
-    .then((response) => {
-    	this.setState({ // set state after successful api call
-    		beers: remaindingBeers
-    	})
-    })
-    .catch((error) => {
-    	console.log(error);
-    });
+    if(this.props.accessToken.length) {
+      // API Delete request
+      axios.delete('/api/beers/' + id + '?access_token=' + this.props.accessToken)
+      .then((response) => {
+        this.setState({ // set state after successful api call
+          beers: remaindingBeers
+        })
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    }
+    else {
+      alert('Sorry, login first to delete a beer!')
+    }
   }
 
   /** 
@@ -62,24 +67,29 @@ class BeerList extends Component {
    */
   addBeer(newName, newBrewery, newAlcoholContent) {
 
-    // POST API request, 2nd parameter = new beer object
-    axios.post('/api/beers/', {
-      name: newName,
-      brewery: newBrewery,
-      alcoholContent: newAlcoholContent
-    })
-    .then((response) => { // successfull api call = beer added to mongodb database
-      let updatedBeers = this.state.beers; // never manipulate state directly => create local variable (updatedBeers)
-      updatedBeers.push(response.data); // add new beer (response.data) to updatedBeers array
+    if(this.props.accessToken.length) {
+      // POST API request, 2nd parameter = new beer object
+      axios.post('/api/beers/?access_token=' + this.props.accessToken, {
+        name: newName,
+        brewery: newBrewery,
+        alcoholContent: newAlcoholContent
+      })
+      .then((response) => { // successfull api call = beer added to mongodb database
+        let updatedBeers = this.state.beers; // never manipulate state directly => create local variable (updatedBeers)
+        updatedBeers.push(response.data); // add new beer (response.data) to updatedBeers array
 
-      // set state after successful api call
-    	this.setState({
-    		beers: updatedBeers
-    	})
-    })
-    .catch((error) => { 
-    	console.log(error);
-    });
+        // set state after successful api call
+        this.setState({
+          beers: updatedBeers
+        })
+      })
+      .catch((error) => { 
+        console.log(error);
+      });
+    }
+    else {
+      alert('Sorry, login first to create a beer!')
+    }
   }
 
   render() {
