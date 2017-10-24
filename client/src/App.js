@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import BeerList from './BeerList';
 import BeerDetails from './BeerDetails';
+import BeerUpdate from './BeerUpdate';
 
-import {
-	BrowserRouter,
-	Switch,
-	Route
-} from 'react-router-dom'
+// App.js only delegates the different routes
 class App extends Component {
 
 	render() {
@@ -15,6 +13,7 @@ class App extends Component {
 				<Switch>
 					<Route exact path="/" component={BeerList} />
 					<Route exact path="/beers/:id" component={BeerDetails} />
+					<Route exact path="/beers/update/:id" component={BeerUpdate} />
 				</Switch>
 			</BrowserRouter>
     );

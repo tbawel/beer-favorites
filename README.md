@@ -80,6 +80,7 @@ Build the front-end for your app using React. I will use my beer list example as
 - Wrap every beer item in a link, which when clicked takes the user to the designated beer detail page
 - Add a "Back" button under the beer details, which when clicked takes the user back to the beer list
 - Add a "Edit" button under the beer details, which when clicked takes the user to a form where the beer can be edited
+- Redirect user back to beer detail page, if user updates beer
 
 All the CRUD operations above should persist in your mLab database
 
