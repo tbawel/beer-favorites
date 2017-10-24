@@ -1,10 +1,23 @@
 import React, { Component } from 'react';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import BeerList from './BeerList';
+import BeerDetails from './BeerDetails';
+import BeerUpdate from './BeerUpdate';
 
+// App.js only delegates the different routes
 class App extends Component {
 
-  render() {
-    return <div></div>;
-  }
+	render() {
+		return (
+			<BrowserRouter>
+				<Switch>
+					<Route exact path="/" component={BeerList} />
+					<Route exact path="/beers/:id" component={BeerDetails} />
+					<Route exact path="/beers/update/:id" component={BeerUpdate} />
+				</Switch>
+			</BrowserRouter>
+    );
+	}
 }
 
 export default App;
