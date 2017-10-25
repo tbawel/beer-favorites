@@ -1,22 +1,19 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import BeerAdd from './BeerAdd';
 
 class BeerList extends Component {
   constructor() {
     super();
     this.state = {
-      beers: [],
-      name: '',
-      brewery: '',
-      alcoholContent: 0
+      beers: []
     }
 
     this.addBeer = this.addBeer.bind(this);
-    this.handleInputChange = this.handleInputChange.bind(this);
   }
 
-  componentWillMount() {
+  componentDidMount() {
 
     // API GET request => get all beers in database
     axios.get('/api/beers')
@@ -30,64 +27,69 @@ class BeerList extends Component {
       });
   }
 
-  /* Gets called if user clicks on Delete button
+  /** Gets called if user clicks on Delete button
    * via the JS native onClick event handler
    */
   deleteBeer(id) {
 
     // save remainding beers in variable (array)
-    let remaindingBeers = this.state.beers.filter((beer) => {
+    let remaindingBeers = [];
+    this.state.beers.forEach((beer) => {
       if(beer.id !== id) {
-        return beer;
+        remaindingBeers.push(beer);
       }
     });
 
-    // API Delete request
-    axios.delete('/api/beers/' + id)
-    .then((response) => {
-    	this.setState({ // set state again after successful api call
-    		beers: remaindingBeers
-    	})
-    })
-    .catch((error) => {
-    	console.log(error);
-    });
+    if(this.props.accessToken.length) {
+      // API Delete request
+      axios.delete('/api/beers/' + id + '?access_token=' + this.props.accessToken)
+      .then((response) => {
+        this.setState({ // set state after successful api call
+          beers: remaindingBeers
+        })
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    }
+    else {
+      alert('Sorry, login first to delete a beer!')
+    }
   }
 
-  /**
-   * Update properties on every key up
-   */
-  handleInputChange(e) {
-    this.setState({     
-        [e.target.name]: e.target.value     
-    });
-  }
-
-  /* Gets called when user clicks "Add Beer" button
+  /** 
+   * Gets called when user clicks "Add Beer" button
    * via JS native onSubmit form event handler
+   * 
+   * Since this method needs data from the 
+   * child component "BeerAddForm", it is passed down to
+   * that child component via the property "onAddBeer"
    */
-  addBeer(e) {
-    e.preventDefault(); // prevent default behavior of refreshing page
+  addBeer(newName, newBrewery, newAlcoholContent) {
 
-    // POST API request, 2nd parameter = new beer object
-    axios.post('/api/beers/', {
-      name: this.state.name,
-      brewery: this.state.brewery,
-      alcoholContent: this.state.alcoholContent
-    })
-    .then((response) => { // successfull api call = beer added to mongodb database
+    if(this.props.accessToken.length) {
+      // POST API request, 2nd parameter = new beer object
+      axios.post('/api/beers/?access_token=' + this.props.accessToken, {
+        name: newName,
+        brewery: newBrewery,
+        alcoholContent: newAlcoholContent
+      })
+      .then((response) => { // successfull api call = beer added to mongodb database
+        let updatedBeers = this.state.beers; // never manipulate state directly => create local variable (updatedBeers)
+        updatedBeers.push(response.data); // add new beer (response.data) to updatedBeers array
 
-      let updatedBeers = this.state.beers; // never manipulate state directly => create local variable (updatedBeers)
-      updatedBeers.push(response.data); // add new beer (response.data) to updatedBeers array
-
-      // set state again after successful api call
-    	this.setState({
-    		beers: updatedBeers
-    	})
-    })
-    .catch((error) => { 
-    	console.log(error);
-    });
+        // set state after successful api call
+        this.setState({
+          beers: updatedBeers
+        })
+      })
+      .catch((error) => { 
+        console.log(error);
+      });
+    }
+    else {
+      alert('Sorry, login first to create a beer!')
+    }
   }
 
   render() {
@@ -95,7 +97,7 @@ class BeerList extends Component {
     let beerItems = this.state.beers.map((beer) => {
       return (
         <li key={beer.id}>
-          <Link to={ '/beers/' + beer.id }>{beer.name}</Link>, { beer.brewery }
+          <Link to={'/beers/' + beer.id }>{beer.name}</Link> {/* Adds link to beer detail views */}
           <button onClick={ this.deleteBeer.bind(this, beer.id) }>Delete</button>
         </li>
       )
@@ -104,17 +106,14 @@ class BeerList extends Component {
     return (
       <div>
         <ul>
-          {beerItems}
+          {beerItems} {/* Renders <li>'s from line 88-91 */}
         </ul>
-        <form onSubmit={ this.addBeer }>
-          <label id="newBeerName">Name:</label>
-          <input id="newBeerName" name="name" type="text" onChange={ this.handleInputChange }/><br/>
-          <label id="newBeerBrewery">Brewery:</label>
-          <input id="newBeerBrewery" name="brewery" type="text" onChange={ this.handleInputChange }/><br/>
-          <label id="newBeerAlcoholContent">Alcohol Content:</label>
-          <input id="newBeerAlcoholContent" name="alcoholContent" type="number" onChange={ this.handleInputChangeA }/><br/>
-          <button>Add Beer</button>
-        </form>
+        {/* 
+          Child component "BeerAddForm" which passes down
+          the "addBeer" method of this component (parent)
+          with the help of an attribute "onAddBeer" 
+        */}
+        <BeerAdd onAddBeer={ this.addBeer }/> 
       </div>
     );
   }

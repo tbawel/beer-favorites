@@ -10,12 +10,17 @@ class BeerUpdate extends Component {
       brewery: '',
       alcoholContent: 0
     }
+
+    /* 
+     * explicitly bind "this" which refers to 
+     * this component "BeerUpdate"
+     */
     this.updateBeer = this.updateBeer.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
   }
 
   componentDidMount() {
-
+    
     // API GET request => get beer by Id
     axios.get('/api/beers/' + this.props.match.params.id)
       .then((response) => {
@@ -31,9 +36,14 @@ class BeerUpdate extends Component {
   }
 
   /**
-   * Update properties on every key up
+   * Update state every key stroke in input fields
+   * https://reactjs.org/docs/forms.html#controlled-components
    */
   handleInputChange(e) {
+    /* 
+     * [e,target.name] can get value of the "name" attribute of
+     * the input field which is currenlty typed in
+     */ 
     this.setState({
         [e.target.name]: e.target.value
     });
@@ -43,21 +53,26 @@ class BeerUpdate extends Component {
    * via JS native onSubmit form event handler
    */
   updateBeer(e) {
-    e.preventDefault(); // prevent default behavior of refreshing page
-    
+    e.preventDefault(); // prevent browser-standard of reloading page on form submit
 
-    // UPDATE/PUT API request, 2nd parameter = updated beer object
-    axios.put('/api/beers/' + this.props.match.params.id, {
-      name: this.refs.name.value, // this.refs accesses ref attributes on form inputs (React feature)
-      brewery: this.refs.brewery.value,
-      alcoholContent: this.refs.alcoholContent.value
-    })
-    .then((response) => { // successfull api call = beer updated in mongodb database
+    // UPDATE/PUT API request, 2nd parameter = object with new details
+    if(this.props.accessToken.length) {
+      axios.put('/api/beers/' + this.props.match.params.id + '?access_token=' + this.props.accessToken, {
+        name: this.state.name,
+        brewery: this.state.brewery,
+        alcoholContent: this.state.alcoholContent
+      })
+      .then((response) => { // successfull api call = beer updated in mongodb database
+        this.props.history.push('/beers/' + this.props.match.params.id); // redirect to beer detail page after update
+      })
+      .catch((error) => { 
+        console.log(error);
+      });
+    }
+    else {
+      alert('Sorry, login first to update the beer!')
+    }
 
-    })
-    .catch((error) => { 
-    	console.log(error);
-    });
   }
 
   /**
@@ -68,15 +83,21 @@ class BeerUpdate extends Component {
       <div>
         <h3>Update Beer</h3>
         <form onSubmit={ this.updateBeer }>
-          <label id="updateBeerName">Name:</label>
-          <input id="updateBeerName" value={ this.state.name } name="name" ref="name" type="text" onChange={ this.handleInputChange }/><br/>
-          <label id="updateBeerBrewery">Brewery:</label>
-          <input id="updateBeerBrewery" value={ this.state.brewery } name="brewery" ref="brewery" type="text" onChange={ this.handleInputChange }/><br/>
-          <label id="updateBeerAlcoholContent">Alcohol Content:</label>
-          <input id="updateBeerAlcoholContent" value={ this.state.alcoholContent } name="alcoholContent" ref="alcoholContent" type="number" onChange={ this.handleInputChange }/><br/>
+          <label>
+            Name:
+            <input value={ this.state.name } name="name" type="text" onChange={ this.handleInputChange }/>
+          </label><br />
+          <label>
+            Brewery:
+            <input value={ this.state.brewery } name="brewery" type="text" onChange={ this.handleInputChange }/>
+          </label><br/>
+          <label>
+            Alcohol Content:
+            <input value={ this.state.alcoholContent } name="alcoholContent" type="number" onChange={ this.handleInputChange }/>
+          </label><br/>
           <button>Update Beer</button>
         </form>
-        <Link to={ '/beers/' + this.props.match.params.id }> <button>Back</button></Link>
+        <Link to={ '/beers/' + this.props.match.params.id }> <button>Back</button></Link> {/* Adds link back to beer details */}
       </div>
     );
   }
