@@ -13,17 +13,19 @@
       "type": "string",
       "required": true
     },
-    "brewery": {
-      "type": "string",
-      "required": true
-    },
     "alcoholContent": {
       "type": "number",
       "required": true
     }
   },
   "validations": [],
-  "relations": {},
+  "relations": {
+    "isCraftedBy": {
+      "type": "belongsTo",
+      "model": "brewery",
+      "foreignKey": "breweryId"
+    }
+  },
   "acls": [
     {
       "accessType": "*",

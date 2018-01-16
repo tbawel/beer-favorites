@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 
 class BeerAdd extends Component {
   constructor() {
     super();
     this.state = {
       name: '',
-      brewery: '',
-      alcoholContent: 0
+      craftedBy: '',
+      alcoholContent: 0,
+      breweries: []
     }
     /* 
      * explicitly bind "this" which refers to 
@@ -16,11 +18,27 @@ class BeerAdd extends Component {
     this.handleInputChange = this.handleInputChange.bind(this);
   }
 
+  componentDidMount() {
+    
+    // API GET request => get all breweries in database
+    axios.get('/api/breweries')
+      .then((response) => {
+        this.setState({
+          breweries: response.data,
+          craftedBy: response.data[0].id
+        })
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
   /**
    * Update state every key stroke in input fields
    * https://reactjs.org/docs/forms.html#controlled-components
    */
   handleInputChange(e) {
+
     this.setState({
       /* 
        * [e,target.name] can get value of the "name" attribute of
@@ -40,16 +58,28 @@ class BeerAdd extends Component {
     /* Use the method of the parent component "BeerList" which has been passed down
      * via the onAddBeer property (this.props)
      */
-    this.props.onAddBeer(this.state.name, this.state.brewery, this.state.alcoholContent);
+    this.props.onAddBeer(this.state.name, this.state.craftedBy, this.state.alcoholContent);
   }
 
   render() {
+
+    let breweryItems = this.state.breweries.map((brewery) => {
+      return (
+        <option key={brewery.id} value={brewery.id}>
+          {brewery.name}
+        </option>
+      )
+    });
+
     return (
       <form onSubmit={ this.addBeer }>
         <label id="newBeerName">Name:</label>
         <input id="newBeerName" name="name" type="text" onChange={ this.handleInputChange }/><br/>
         <label id="newBeerBrewery">Brewery:</label>
-        <input id="newBeerBrewery" name="brewery" type="text" onChange={ this.handleInputChange }/><br/>
+        <select id="newBeerBrewery" name="craftedBy" onChange={ this.handleInputChange }>
+          { breweryItems }
+        </select>
+        <br/>
         <label id="newBeerAlcoholContent">Alcohol Content:</label>
         <input id="newBeerAlcoholContent" name="alcoholContent" type="number" onChange={ this.handleInputChange }/><br/>
         <button>Add Beer</button>

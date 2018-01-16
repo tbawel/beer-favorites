@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import { Button } from 'react-bootstrap';
 import BeerAdd from './BeerAdd';
 
 class BeerList extends Component {
@@ -18,6 +19,7 @@ class BeerList extends Component {
     // API GET request => get all beers in database
     axios.get('/api/beers')
       .then((response) => {
+        console.log(response)
         this.setState({
           beers: response.data
         })
@@ -97,8 +99,8 @@ class BeerList extends Component {
     let beerItems = this.state.beers.map((beer) => {
       return (
         <li key={beer.id}>
-          <Link to={'/beers/' + beer.id }>{beer.name}</Link> {/* Adds link to beer detail views */}
-          <button onClick={ this.deleteBeer.bind(this, beer.id) }>Delete</button>
+          <Link to={'/beers/' + beer.id }>{beer.name}, {beer.brewery}</Link> {/* Adds link to beer detail views */}
+          <button onClick={ this.deleteBeer.bind(this, beer.id) } className="btn btn-success">Delete</button>
         </li>
       )
     });
