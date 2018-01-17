@@ -19,7 +19,6 @@ class BeerList extends Component {
     // API GET request => get all beers in database
     axios.get('/api/beers')
       .then((response) => {
-        console.log(response)
         this.setState({
           beers: response.data
         })
