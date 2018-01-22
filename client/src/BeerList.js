@@ -41,16 +41,17 @@ class BeerList extends Component {
       }
     });
 
-    if(this.props.accessToken.length) {
+    let accessToken = localStorage.getItem('beerFavsAT');
+    if( accessToken ) {
       // API Delete request
-      axios.delete('/api/beers/' + id + '?access_token=' + this.props.accessToken)
+      axios.delete('/api/beers/' + id + '?access_token=' + accessToken)
       .then((response) => {
         this.setState({ // set state after successful api call
           beers: remaindingBeers
         })
       })
       .catch((error) => {
-        console.log(error);
+        alert('Sorry, could not delete beer! ' + error)
       });
     }
     else {
@@ -68,9 +69,10 @@ class BeerList extends Component {
    */
   addBeer(newName, newBrewery, newAlcoholContent) {
 
-    if(this.props.accessToken.length) {
+    let accessToken = localStorage.getItem('beerFavsAT');
+    if( accessToken ) {
       // POST API request, 2nd parameter = new beer object
-      axios.post('/api/beers/?access_token=' + this.props.accessToken, {
+      axios.post('/api/beers/?access_token=' + accessToken, {
         name: newName,
         brewery: newBrewery,
         alcoholContent: newAlcoholContent
@@ -85,7 +87,7 @@ class BeerList extends Component {
         })
       })
       .catch((error) => { 
-        console.log(error);
+        alert('Sorry, could not add beer! ' + error)
       });
     }
     else {

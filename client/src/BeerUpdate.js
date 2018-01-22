@@ -56,8 +56,9 @@ class BeerUpdate extends Component {
     e.preventDefault(); // prevent browser-standard of reloading page on form submit
 
     // UPDATE/PUT API request, 2nd parameter = object with new details
-    if(this.props.accessToken.length) {
-      axios.put('/api/beers/' + this.props.match.params.id + '?access_token=' + this.props.accessToken, {
+    let accessToken = localStorage.getItem('beerFavsAT');
+    if( accessToken ) {
+      axios.put('/api/beers/' + this.props.match.params.id + '?access_token=' + accessToken, {
         name: this.state.name,
         brewery: this.state.brewery,
         alcoholContent: this.state.alcoholContent
@@ -66,7 +67,7 @@ class BeerUpdate extends Component {
         this.props.history.push('/beers/' + this.props.match.params.id); // redirect to beer detail page after update
       })
       .catch((error) => { 
-        console.log(error);
+        alert('Sorry, could not update beer! ' + error)
       });
     }
     else {

@@ -33,10 +33,8 @@ class Login extends Component {
 		})
     .then((response) => { // successful api call
 
-      /* Use the method of the parent component "App" which has been passed down
-       * via the onLogin property (this.props)
-       */
-			this.props.onLogin(response.data.id); 
+      // Set access token in local storage
+			localStorage.setItem('beerFavsAT', response.data.id); 
     })
     .catch((error) => {
     	console.log(error);
