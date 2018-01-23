@@ -8,7 +8,11 @@ class BeerAdd extends Component {
       name: '',
       craftedBy: '',
       alcoholContent: 0,
-      breweries: []
+      breweries: [
+        'MAP Brewing',
+        'Bridger Brewing',
+        '406 Brewing'
+      ]
     }
     /* 
      * explicitly bind "this" which refers to 
@@ -21,16 +25,16 @@ class BeerAdd extends Component {
   componentDidMount() {
     
     // API GET request => get all breweries in database
-    axios.get('/api/breweries')
-      .then((response) => {
-        this.setState({
-          breweries: response.data,
-          craftedBy: response.data[0].id
-        })
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    // axios.get('/api/breweries')
+    // .then((response) => {
+    //   this.setState({
+    //     breweries: response.data,
+    //     craftedBy: response.data[0].id
+    //   })
+    // })
+    // .catch((error) => {
+    //   console.log(error);
+    // });
   }
 
   /**
@@ -63,10 +67,10 @@ class BeerAdd extends Component {
 
   render() {
 
-    let breweryItems = this.state.breweries.map((brewery) => {
+    let breweryItems = this.state.breweries.map((brewery, index) => {
       return (
-        <option key={brewery.id} value={brewery.id}>
-          {brewery.name}
+        <option key={index} value={brewery}>
+          {brewery}
         </option>
       )
     });

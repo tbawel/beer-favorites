@@ -11,16 +11,18 @@ class BeerDetails extends Component {
 
   componentDidMount() {
 
+    this.state.details = this.props.beer;
+
     // API GET request => get beer by Id
-    axios.get('/api/beers/' + this.props.match.params.id)
-      .then((response) => {
-        this.setState({ // set state after successful api call
-          details: response.data
-        })
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    // axios.get('/api/beers/' + this.props.match.params.id)
+    //   .then((response) => {
+    //     this.setState({ // set state after successful api call
+    //       details: response.data
+    //     })
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //   });
   }
 
   render() {

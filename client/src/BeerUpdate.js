@@ -22,17 +22,17 @@ class BeerUpdate extends Component {
   componentDidMount() {
     
     // API GET request => get beer by Id
-    axios.get('/api/beers/' + this.props.match.params.id)
-      .then((response) => {
-        this.setState({
-          name: response.data.name,
-          brewery: response.data.brewery,
-          alcoholContent: response.data.alcoholContent
-        })
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    // axios.get('/api/beers/' + this.props.match.params.id)
+    //   .then((response) => {
+    //     this.setState({
+    //       name: response.data.name,
+    //       brewery: response.data.brewery,
+    //       alcoholContent: response.data.alcoholContent
+    //     })
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //   });
   }
 
   /**
@@ -56,23 +56,23 @@ class BeerUpdate extends Component {
     e.preventDefault(); // prevent browser-standard of reloading page on form submit
 
     // UPDATE/PUT API request, 2nd parameter = object with new details
-    let accessToken = localStorage.getItem('beerFavsAT');
-    if( accessToken ) {
-      axios.put('/api/beers/' + this.props.match.params.id + '?access_token=' + accessToken, {
-        name: this.state.name,
-        brewery: this.state.brewery,
-        alcoholContent: this.state.alcoholContent
-      })
-      .then((response) => { // successfull api call = beer updated in mongodb database
-        this.props.history.push('/beers/' + this.props.match.params.id); // redirect to beer detail page after update
-      })
-      .catch((error) => { 
-        alert('Sorry, could not update beer! ' + error)
-      });
-    }
-    else {
-      alert('Sorry, login first to update the beer!')
-    }
+    // let accessToken = localStorage.getItem('beerFavsAT');
+    // if( accessToken ) {
+    //   axios.put('/api/beers/' + this.props.match.params.id + '?access_token=' + accessToken, {
+    //     name: this.state.name,
+    //     brewery: this.state.brewery,
+    //     alcoholContent: this.state.alcoholContent
+    //   })
+    //   .then((response) => { // successfull api call = beer updated in mongodb database
+    //     this.props.history.push('/beers/' + this.props.match.params.id); // redirect to beer detail page after update
+    //   })
+    //   .catch((error) => { 
+    //     alert('Sorry, could not update beer! ' + error)
+    //   });
+    // }
+    // else {
+    //   alert('Sorry, login first to update the beer!')
+    // }
 
   }
 

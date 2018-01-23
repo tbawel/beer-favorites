@@ -8,7 +8,12 @@ class BeerList extends Component {
   constructor() {
     super();
     this.state = {
-      beers: []
+      beers: [{
+        id: 1,
+        name: "Thunder Monkey",
+        brewery: "MAP Brewing",
+        alcoholContent: 4.2
+      }]
     }
 
     this.addBeer = this.addBeer.bind(this);
@@ -17,15 +22,15 @@ class BeerList extends Component {
   componentDidMount() {
 
     // API GET request => get all beers in database
-    axios.get('/api/beers')
-      .then((response) => {
-        this.setState({
-          beers: response.data
-        })
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    // axios.get('/api/beers')
+    // .then((response) => {
+    //   this.setState({
+    //     beers: response.data
+    //   })
+    // })
+    // .catch((error) => {
+    //   console.log(error);
+    // });
   }
 
   /** Gets called if user clicks on Delete button
@@ -68,31 +73,44 @@ class BeerList extends Component {
    * that child component via the property "onAddBeer"
    */
   addBeer(newName, newBrewery, newAlcoholContent) {
+    
+    let updatedBeers = this.state.beers; // never manipulate state directly => create local variable (updatedBeers)
 
-    let accessToken = localStorage.getItem('beerFavsAT');
-    if( accessToken ) {
-      // POST API request, 2nd parameter = new beer object
-      axios.post('/api/beers/?access_token=' + accessToken, {
-        name: newName,
-        brewery: newBrewery,
-        alcoholContent: newAlcoholContent
-      })
-      .then((response) => { // successfull api call = beer added to mongodb database
-        let updatedBeers = this.state.beers; // never manipulate state directly => create local variable (updatedBeers)
-        updatedBeers.push(response.data); // add new beer (response.data) to updatedBeers array
+    updatedBeers.push({
+      name: newName,
+      brewery: newBrewery,
+      alcoholContent: newAlcoholContent
+    }); // add new beer to updatedBeers array
+    
+    // set state after successful api call
+    this.setState({
+      beers: updatedBeers
+    })
 
-        // set state after successful api call
-        this.setState({
-          beers: updatedBeers
-        })
-      })
-      .catch((error) => { 
-        alert('Sorry, could not add beer! ' + error)
-      });
-    }
-    else {
-      alert('Sorry, login first to create a beer!')
-    }
+    // let accessToken = localStorage.getItem('beerFavsAT');
+    // if( accessToken ) {
+    //   // POST API request, 2nd parameter = new beer object
+    //   axios.post('/api/beers/?access_token=' + accessToken, {
+    //     name: newName,
+    //     brewery: newBrewery,
+    //     alcoholContent: newAlcoholContent
+    //   })
+    //   .then((response) => { // successfull api call = beer added to mongodb database
+    //     let updatedBeers = this.state.beers; // never manipulate state directly => create local variable (updatedBeers)
+    //     updatedBeers.push(response.data); // add new beer (response.data) to updatedBeers array
+
+    //     // set state after successful api call
+    //     this.setState({
+    //       beers: updatedBeers
+    //     })
+    //   })
+    //   .catch((error) => { 
+    //     alert('Sorry, could not add beer! ' + error)
+    //   });
+    // }
+    // else {
+    //   alert('Sorry, login first to create a beer!')
+    // }
   }
 
   render() {
@@ -100,7 +118,7 @@ class BeerList extends Component {
     let beerItems = this.state.beers.map((beer) => {
       return (
         <li key={beer.id}>
-          <Link to={'/beers/' + beer.id }>{beer.name}, {beer.brewery}</Link> {/* Adds link to beer detail views */}
+          <Link to={'/beers/' + beer.id } beer={beer}>{beer.name}, {beer.brewery}</Link> {/* Adds link to beer detail views */}
           <button onClick={ this.deleteBeer.bind(this, beer.id) } className="btn btn-success">Delete</button>
         </li>
       )
