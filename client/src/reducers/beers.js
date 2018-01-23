@@ -1,6 +1,6 @@
 import {
   ADD_BEER
-} from './actions'
+} from '../actions/beers'
 
 function beers(state = [], action) {
   switch (action.type) {
