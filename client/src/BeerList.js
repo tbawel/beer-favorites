@@ -1,21 +1,14 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import axios from 'axios';
 import { Button } from 'react-bootstrap';
 import BeerAdd from './BeerAdd';
 
 class BeerList extends Component {
-  constructor() {
-    super();
-    this.state = {
-      beers: [{
-        id: 1,
-        name: "Thunder Monkey",
-        brewery: "MAP Brewing",
-        alcoholContent: 4.2
-      }]
-    }
-
+  constructor(props) {
+    super(props);
+    
     this.addBeer = this.addBeer.bind(this);
   }
 
@@ -115,7 +108,7 @@ class BeerList extends Component {
 
   render() {
 
-    let beerItems = this.state.beers.map((beer) => {
+    let beerItems = this.props.beers.map((beer) => {
       return (
         <li key={beer.id}>
           <Link to={'/beers/' + beer.id } beer={beer}>{beer.name}, {beer.brewery}</Link> {/* Adds link to beer detail views */}

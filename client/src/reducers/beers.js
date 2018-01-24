@@ -2,7 +2,17 @@ import {
   ADD_BEER
 } from '../actions/beers'
 
-function beers(state = [], action) {
+const initialState = [
+  {
+		id: 0,
+    name: 'Thunder Monkey',
+		brewery: 'MAP Brewing',
+		alcoholContent: 4.2
+
+  }
+]
+
+export default function beers(state = initialState, action) {
   switch (action.type) {
     case ADD_BEER:
       return [
@@ -17,5 +27,3 @@ function beers(state = [], action) {
       return state
   }
 }
-
-export default beers;

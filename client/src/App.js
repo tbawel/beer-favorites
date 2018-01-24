@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import { connect } from 'react-redux'
 import BeerList from './BeerList';
 import BeerDetails from './BeerDetails';
 import BeerUpdate from './BeerUpdate';
@@ -7,8 +8,8 @@ import Login from './Login';
 
 // App.js only delegates the different routes
 class App extends Component {
-	constructor() {
-		super();
+	constructor(props) {
+		super(props);
 	}
 
 	render() {
@@ -20,7 +21,7 @@ class App extends Component {
 							In order to pass along properties to the component for a route needs to be attached 
 							via the an anonymous render function.
 						*/}
-						<Route exact path="/" render={ ({ match, history }) => <BeerList match={ match } history={ history } />} />
+						<Route exact path="/" render={ ({ match, history }) => <BeerList match={ match } history={ history } beers={ this.props.beers }/>} />
 						<Route exact path="/beers/:id" render={ ({ match, history }) => <BeerDetails match={ match } history={ history } />} />
 						<Route exact path="/beers/update/:id" render={ ({ match, history }) => <BeerUpdate match={ match } history={ history } />} />
 					</Switch>
@@ -34,4 +35,10 @@ class App extends Component {
 	}
 }
 
-export default App;
+const mapStateToProps = state => ({
+  beers: state.beers
+})
+
+export default connect(
+  mapStateToProps
+)(App)
