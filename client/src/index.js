@@ -8,10 +8,6 @@ import registerServiceWorker from './registerServiceWorker';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/css/bootstrap-theme.css';
 
-import {
-  addBeer
-} from './actions/beers';
-
 const store = createStore(reducers);
 
 ReactDOM.render(<Provider store={store}><App /></Provider>, document.getElementById('root'));

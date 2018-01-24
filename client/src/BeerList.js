@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import PropTypes from 'prop-types';
 import axios from 'axios';
-import { Button } from 'react-bootstrap';
 import BeerAdd from './BeerAdd';
+import { connect } from 'react-redux';
 
 class BeerList extends Component {
   constructor(props) {
@@ -127,7 +126,7 @@ class BeerList extends Component {
           the "addBeer" method of this component (parent)
           with the help of an attribute "onAddBeer" 
         */}
-        <BeerAdd onAddBeer={ this.addBeer }/> 
+        <BeerAdd action={ this.props.action }/> 
       </div>
     );
   }

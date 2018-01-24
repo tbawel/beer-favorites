@@ -6,7 +6,7 @@ class BeerAdd extends Component {
     super();
     this.state = {
       name: '',
-      craftedBy: '',
+      craftedBy: 'MAP Brewing',
       alcoholContent: 0,
       breweries: [
         'MAP Brewing',
@@ -62,7 +62,11 @@ class BeerAdd extends Component {
     /* Use the method of the parent component "BeerList" which has been passed down
      * via the onAddBeer property (this.props)
      */
-    this.props.onAddBeer(this.state.name, this.state.craftedBy, this.state.alcoholContent);
+    this.props.action({
+      name: this.state.name,
+      brewery: this.state.craftedBy, 
+      alcoholContent: this.state.alcoholContent
+    });
   }
 
   render() {
