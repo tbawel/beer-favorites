@@ -1,6 +1,7 @@
 import {
   ADD_BEER,
-  DELETE_BEER
+  DELETE_BEER,
+  UPDATE_BEER
 } from '../actions/beers'
 
 const initialState = [
@@ -29,6 +30,12 @@ export default function beers(state = initialState, action) {
       return state.filter(beer => {
         return beer.id !== action.id
       })
+    case UPDATE_BEER:
+      return state.map( beer => {
+        return beer.id === action.id ? action.beer : beer;
+      })
+
+
     default:
       return state
   }

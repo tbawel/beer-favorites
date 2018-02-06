@@ -4,9 +4,7 @@ import { Link } from 'react-router-dom';
 class BeerUpdate extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      details: {}
-    }
+    this.state = {}
 
     /* 
      * explicitly bind "this" which refers to 
@@ -23,7 +21,10 @@ class BeerUpdate extends Component {
     })
 
     this.setState({
-      details: newDetails
+      id: parseInt(this.props.match.params.id),
+      name: newDetails.name,
+      brewery: newDetails.brewery,
+      alcoholContent: newDetails.alcoholContent
     })
   }
 
@@ -47,6 +48,8 @@ class BeerUpdate extends Component {
   updateBeer(e) {
     e.preventDefault(); // prevent browser-standard of reloading page on form submit
 
+    this.props.updateBeer(parseInt(this.props.match.params.id), this.state)
+    this.props.history.push('/beers/' + this.props.match.params.id); // redirect to beer detail page after update
     // UPDATE/PUT API request, 2nd parameter = object with new details
     // let accessToken = localStorage.getItem('beerFavsAT');
     // if( accessToken ) {
@@ -78,15 +81,15 @@ class BeerUpdate extends Component {
         <form onSubmit={ this.updateBeer }>
           <label>
             Name:
-            <input value={ this.state.details.name } name="name" type="text" onChange={ this.handleInputChange }/>
+            <input value={ this.state.name } name="name" type="text" onChange={ this.handleInputChange }/>
           </label><br />
           <label>
             Brewery:
-            <input value={ this.state.details.brewery } name="brewery" type="text" onChange={ this.handleInputChange }/>
+            <input value={ this.state.brewery } name="brewery" type="text" onChange={ this.handleInputChange }/>
           </label><br/>
           <label>
             Alcohol Content:
-            <input value={ this.state.details.alcoholContent } name="alcoholContent" type="number" onChange={ this.handleInputChange }/>
+            <input value={ this.state.alcoholContent } name="alcoholContent" type="number" onChange={ this.handleInputChange }/>
           </label><br/>
           <button>Update Beer</button>
         </form>
