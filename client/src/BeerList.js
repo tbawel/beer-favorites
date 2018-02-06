@@ -19,7 +19,7 @@ class BeerList extends Component {
     let beerItems = this.props.beers.map((beer) => {
       return (
         <li key={beer.id}>
-          <Link to={'/beers/' + beer.id } beer={beer}>{beer.name}, {beer.brewery}</Link> {/* Adds link to beer detail views */}
+          <Link to={'/beers/' + beer.id }>{beer.name}, {beer.brewery}</Link> {/* Adds link to beer detail views */}
           <button onClick={ this.deleteBeer.bind(this, beer.id) } className="btn btn-success">Delete</button>
         </li>
       )

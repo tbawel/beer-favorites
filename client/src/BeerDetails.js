@@ -2,25 +2,20 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 class BeerDetails extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       details: {} // details holds all values for a beer (id, name, brewery, alcoholContent)
     }
   }
 
-  componentDidMount() {
+  componentWillMount() {
 
-    // API GET request => get beer by Id
-    // axios.get('/api/beers/' + this.props.match.params.id)
-    //   .then((response) => {
-    //     this.setState({ // set state after successful api call
-    //       details: response.data
-    //     })
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //   });
+    // Get beer by Id
+    let selectedBeers =  this.props.beers.filter(beer => {
+      return beer.id === parseInt(this.props.match.params.id)
+    })
+    this.state.details = selectedBeers[0];
   }
 
   render() {
