@@ -12,10 +12,9 @@ class BeerDetails extends Component {
   componentWillMount() {
 
     // Get beer by Id
-    let selectedBeers =  this.props.beers.filter(beer => {
+    this.state.details =  this.props.beers.find(beer => {
       return beer.id === parseInt(this.props.match.params.id)
     })
-    this.state.details = selectedBeers[0];
   }
 
   render() {
