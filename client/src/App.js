@@ -25,7 +25,7 @@ class App extends Component {
 						*/}
 						<Route exact path="/" render={ ({ match, history }) => <BeerList match={ match } history={ history } beers={ this.props.beers } addBeer={ this.props.actions.addBeer } deleteBeer={ this.props.actions.deleteBeer }  />} />
 						<Route exact path="/beers/:id" render={ ({ match, history }) => <BeerDetails match={ match } history={ history } beers={ this.props.beers } />} />
-						<Route exact path="/beers/update/:id" render={ ({ match, history }) => <BeerUpdate match={ match } history={ history } />} />
+						<Route exact path="/beers/update/:id" render={ ({ match, history }) => <BeerUpdate match={ match } history={ history } beers={ this.props.beers } />} />
 					</Switch>
 				</BrowserRouter>
 				{/* 

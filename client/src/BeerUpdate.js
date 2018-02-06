@@ -2,12 +2,10 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
 class BeerUpdate extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
-      name: '',
-      brewery: '',
-      alcoholContent: 0
+      details: {}
     }
 
     /* 
@@ -18,20 +16,15 @@ class BeerUpdate extends Component {
     this.handleInputChange = this.handleInputChange.bind(this);
   }
 
-  componentDidMount() {
-    
-    // API GET request => get beer by Id
-    // axios.get('/api/beers/' + this.props.match.params.id)
-    //   .then((response) => {
-    //     this.setState({
-    //       name: response.data.name,
-    //       brewery: response.data.brewery,
-    //       alcoholContent: response.data.alcoholContent
-    //     })
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //   });
+  componentWillMount() {
+    // Get beer by Id
+    let newDetails =  this.props.beers.find(beer => {
+      return beer.id === parseInt(this.props.match.params.id)
+    })
+
+    this.setState({
+      details: newDetails
+    })
   }
 
   /**
@@ -85,15 +78,15 @@ class BeerUpdate extends Component {
         <form onSubmit={ this.updateBeer }>
           <label>
             Name:
-            <input value={ this.state.name } name="name" type="text" onChange={ this.handleInputChange }/>
+            <input value={ this.state.details.name } name="name" type="text" onChange={ this.handleInputChange }/>
           </label><br />
           <label>
             Brewery:
-            <input value={ this.state.brewery } name="brewery" type="text" onChange={ this.handleInputChange }/>
+            <input value={ this.state.details.brewery } name="brewery" type="text" onChange={ this.handleInputChange }/>
           </label><br/>
           <label>
             Alcohol Content:
-            <input value={ this.state.alcoholContent } name="alcoholContent" type="number" onChange={ this.handleInputChange }/>
+            <input value={ this.state.details.alcoholContent } name="alcoholContent" type="number" onChange={ this.handleInputChange }/>
           </label><br/>
           <button>Update Beer</button>
         </form>
