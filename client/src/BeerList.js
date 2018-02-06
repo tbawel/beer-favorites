@@ -7,6 +7,11 @@ class BeerList extends Component {
     super(props);
   }
 
+  componentDidMount() {
+    this.props.fetchBeers();
+    console.log(this.props);
+  }
+
   /** Gets called if user clicks on Delete button
    * via the JS native onClick event handler
    */

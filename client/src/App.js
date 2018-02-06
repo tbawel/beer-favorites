@@ -23,7 +23,7 @@ class App extends Component {
 							In order to pass along properties to the component for a route needs to be attached 
 							via the an anonymous render function.
 						*/}
-						<Route exact path="/" render={ ({ match, history }) => <BeerList match={ match } history={ history } beers={ this.props.beers } addBeer={ this.props.actions.addBeer } deleteBeer={ this.props.actions.deleteBeer }  />} />
+						<Route exact path="/" render={ ({ match, history }) => <BeerList match={ match } history={ history } beers={ this.props.beers } fetchBeers={ this.props.actions.fetchBeers } addBeer={ this.props.actions.addBeer } deleteBeer={ this.props.actions.deleteBeer }  />} />
 						<Route exact path="/beers/:id" render={ ({ match, history }) => <BeerDetails match={ match } history={ history } beers={ this.props.beers } />} />
 						<Route exact path="/beers/update/:id" render={ ({ match, history }) => <BeerUpdate match={ match } history={ history } beers={ this.props.beers } updateBeer={ this.props.actions.updateBeer } />} />
 					</Switch>
@@ -38,7 +38,7 @@ class App extends Component {
 }
 
 const mapStateToProps = state => ({
-  beers: state.beers
+  beers: state.beers.beers
 })
 
 const mapDispatchToProps = dispatch => ({

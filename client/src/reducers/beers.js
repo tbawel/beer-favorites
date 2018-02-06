@@ -1,21 +1,27 @@
 import {
   ADD_BEER,
   DELETE_BEER,
-  UPDATE_BEER
+  UPDATE_BEER,
+  FETCH_BEERS_PENDING,
+  FETCH_BEERS_FULFILLED,
+  FETCH_BEERS_REJECTED
 } from '../actions/beers'
 
-const initialState = [
-  {
-		id: 0,
-    name: 'Thunder Monkey',
-		brewery: 'MAP Brewing',
-		alcoholContent: 4.2
-
-  }
-]
+const initialState = {
+  beers: [],
+  fetching: false,
+  fetched: false,
+  error: null
+}
 
 export default function beers(state = initialState, action) {
   switch (action.type) {
+    case FETCH_BEERS_PENDING:
+      return { ...state, fetching: true }
+    case FETCH_BEERS_FULFILLED:
+      return { ...state, fetching: false, fetched: true, beers: action.payload.data }
+    case FETCH_BEERS_REJECTED:
+      return { ...state, fetching: false, error: action.payload }
     case ADD_BEER:
       return [
         ...state,
