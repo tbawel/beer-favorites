@@ -46,7 +46,7 @@ class BeerAdd extends Component {
     /* Use the method of the parent component "BeerList" which has been passed down
      * via the onAddBeer property (this.props)
      */
-    this.props.action({
+    this.props.addBeer({
       name: this.state.name,
       brewery: this.state.craftedBy, 
       alcoholContent: this.state.alcoholContent

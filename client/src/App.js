@@ -23,7 +23,7 @@ class App extends Component {
 							In order to pass along properties to the component for a route needs to be attached 
 							via the an anonymous render function.
 						*/}
-						<Route exact path="/" render={ ({ match, history, beers, action }) => <BeerList match={ match } history={ history } beers={ this.props.beers } action={ this.props.actions.addBeer }/>} />
+						<Route exact path="/" render={ ({ match, history }) => <BeerList match={ match } history={ history } beers={ this.props.beers } addBeer={ this.props.actions.addBeer } deleteBeer={ this.props.actions.deleteBeer }  />} />
 						<Route exact path="/beers/:id" render={ ({ match, history }) => <BeerDetails match={ match } history={ history } />} />
 						<Route exact path="/beers/update/:id" render={ ({ match, history }) => <BeerUpdate match={ match } history={ history } />} />
 					</Switch>

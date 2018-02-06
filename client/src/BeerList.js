@@ -11,7 +11,7 @@ class BeerList extends Component {
    * via the JS native onClick event handler
    */
   deleteBeer(id) {
-
+    this.props.deleteBeer(id);
   }
 
   render() {
@@ -35,7 +35,7 @@ class BeerList extends Component {
           the "addBeer" method of this component (parent)
           with the help of an attribute "onAddBeer" 
         */}
-        <BeerAdd action={ this.props.action }/> 
+        <BeerAdd addBeer={ this.props.addBeer }/> 
       </div>
     );
   }

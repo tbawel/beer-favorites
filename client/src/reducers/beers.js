@@ -1,5 +1,6 @@
 import {
-  ADD_BEER
+  ADD_BEER,
+  DELETE_BEER
 } from '../actions/beers'
 
 const initialState = [
@@ -24,6 +25,10 @@ export default function beers(state = initialState, action) {
           alcoholContent: action.beer.alcoholContent
         }
       ]
+    case DELETE_BEER:
+      return state.filter(beer => {
+        return beer.id !== action.id
+      })
     default:
       return state
   }
