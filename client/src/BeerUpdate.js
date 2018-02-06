@@ -50,24 +50,6 @@ class BeerUpdate extends Component {
 
     this.props.updateBeer(parseInt(this.props.match.params.id), this.state)
     this.props.history.push('/beers/' + this.props.match.params.id); // redirect to beer detail page after update
-    // UPDATE/PUT API request, 2nd parameter = object with new details
-    // let accessToken = localStorage.getItem('beerFavsAT');
-    // if( accessToken ) {
-    //   axios.put('/api/beers/' + this.props.match.params.id + '?access_token=' + accessToken, {
-    //     name: this.state.name,
-    //     brewery: this.state.brewery,
-    //     alcoholContent: this.state.alcoholContent
-    //   })
-    //   .then((response) => { // successfull api call = beer updated in mongodb database
-    //     this.props.history.push('/beers/' + this.props.match.params.id); // redirect to beer detail page after update
-    //   })
-    //   .catch((error) => { 
-    //     alert('Sorry, could not update beer! ' + error)
-    //   });
-    // }
-    // else {
-    //   alert('Sorry, login first to update the beer!')
-    // }
 
   }
 
