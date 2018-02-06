@@ -20,7 +20,7 @@ export function fetchBeers() {
 export function addBeer(beer) {
   return {
     type: ADD_BEER,
-    beer: Object.assign({}, beer, {id: ++nextBeerId})
+    payload: axios.post('/api/beers', beer)
   }
 }
 
