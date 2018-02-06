@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import axios from 'axios';
 
 class BeerAdd extends Component {
   constructor() {
@@ -20,21 +19,6 @@ class BeerAdd extends Component {
      */
     this.addBeer = this.addBeer.bind(this); 
     this.handleInputChange = this.handleInputChange.bind(this);
-  }
-
-  componentDidMount() {
-    
-    // API GET request => get all breweries in database
-    // axios.get('/api/breweries')
-    // .then((response) => {
-    //   this.setState({
-    //     breweries: response.data,
-    //     craftedBy: response.data[0].id
-    //   })
-    // })
-    // .catch((error) => {
-    //   console.log(error);
-    // });
   }
 
   /**
