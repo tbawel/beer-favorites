@@ -17,26 +17,7 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      beers: [
-        {
-          id: 0,
-          name: "Choco Stout",
-          alcoholContent: 2.4,
-          brewery: "Bridger Brewing"
-        },
-        {
-          id: 1,
-          name: "Blonde White",
-          alcoholContent: 3.1,
-          brewery: "406 Brewing"
-        },
-        {
-          id: 2,
-          name: "Thunder Monkey",
-          alcoholContent: 4.2,
-          brewery: "MAP Brewing"
-        }
-      ],
+      beers: [],
       newBeerName: "",
       newBeerAlc: 0,
       newBeerBrewery: "",
@@ -53,12 +34,24 @@ class App extends Component {
     this.handleEdit = this.handleEdit.bind(this);
   }
 
+  componentDidMount() {
+    let storedBeers = JSON.parse(
+      window.localStorage.getItem("georgiesBeerFavs")
+    );
+
+    if (storedBeers && storedBeers.length) {
+      this.setState({ beers: storedBeers });
+    }
+  }
+
   deleteBeer(beerId) {
     let newBeers = this.state.beers.filter(beer => beer.id !== beerId);
 
     this.setState({
       beers: newBeers
     });
+
+    localStorage.setItem("georgiesBeerFavs", JSON.stringify(newBeers));
   }
 
   handleChange(event) {
@@ -80,6 +73,8 @@ class App extends Component {
     this.setState({
       beers: newBeers
     });
+
+    localStorage.setItem("georgiesBeerFavs", JSON.stringify(newBeers));
   }
 
   editBeer(beerId) {
@@ -112,6 +107,8 @@ class App extends Component {
     this.setState({
       beers: newBeers
     });
+
+    localStorage.setItem("georgiesBeerFavs", JSON.stringify(newBeers));
   }
 
   render() {
