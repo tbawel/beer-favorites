@@ -11,6 +11,7 @@ import {
   Label,
   Input
 } from "reactstrap";
+import EditBeer from "./EditBeer.js";
 import "./App.css";
 
 class App extends Component {
@@ -37,13 +38,15 @@ class App extends Component {
           brewery: "MAP Brewing"
         }
       ],
+      beerToEdit: {
+        id: -1,
+        name: "",
+        alcoholContent: 0,
+        brewery: ""
+      },
       newBeerName: "",
       newBeerAlc: 0,
-      newBeerBrewery: "",
-      editBeerId: null,
-      editBeerName: "",
-      editBeerAlc: 0,
-      editBeerBrewery: ""
+      newBeerBrewery: ""
     };
 
     this.deleteBeer = this.deleteBeer.bind(this);
@@ -85,10 +88,7 @@ class App extends Component {
   editBeer(beerId) {
     let foundBeer = this.state.beers.find(beer => beer.id === beerId);
     this.setState({
-      editBeerId: beerId,
-      editBeerName: foundBeer.name,
-      editBeerAlc: foundBeer.alcoholContent,
-      editBeerBrewery: foundBeer.brewery
+      beerToEdit: foundBeer
     });
   }
 
@@ -201,60 +201,7 @@ class App extends Component {
               </Form>
             </Col>
             <Col>
-              <h3>Edit Beer</h3>
-              <Form onSubmit={this.handleEdit}>
-                <FormGroup>
-                  <Row>
-                    <Col sm="3">
-                      <Label for="editBeerName">Name:</Label>
-                    </Col>
-                    <Col sm="9">
-                      <Input
-                        type="text"
-                        name="editBeerName"
-                        id="editBeerName"
-                        value={this.state.editBeerName}
-                        onChange={this.handleChange}
-                      />
-                    </Col>
-                  </Row>
-                </FormGroup>
-                <FormGroup>
-                  <Row>
-                    <Col sm="3">
-                      <Label for="editBeerAlc">Alcohol Content:</Label>
-                    </Col>
-                    <Col sm="9">
-                      <Input
-                        type="text"
-                        name="editBeerAlc"
-                        id="editBeerAlc"
-                        value={this.state.editBeerAlc}
-                        onChange={this.handleChange}
-                      />
-                    </Col>
-                  </Row>
-                </FormGroup>
-                <FormGroup>
-                  <Row>
-                    <Col sm="3">
-                      <Label for="editBeerBrewery">Brewery:</Label>
-                    </Col>
-                    <Col sm="9">
-                      <Input
-                        type="text"
-                        name="editBeerBrewery"
-                        id="editBeerBrewery"
-                        value={this.state.editBeerBrewery}
-                        onChange={this.handleChange}
-                      />
-                    </Col>
-                  </Row>
-                </FormGroup>
-                <Button type="submit" className="float-right">
-                  Update Beer
-                </Button>
-              </Form>
+              <EditBeer beer={this.state.beerToEdit} />
             </Col>
           </Row>
         </Container>
