@@ -13,8 +13,6 @@ class EditBeer extends Component {
     this.handleChange = this.handleChange.bind(this);
   }
 
-  componentDidUpdate() {}
-
   handleChange(event) {
     this.setState({ [event.target.name]: event.target.value });
   }
@@ -23,30 +21,23 @@ class EditBeer extends Component {
     event.preventDefault();
     let updatedBeer = {
       id: this.props.beer.id,
-      name: this.state.editBeerName,
-      alcoholContent: this.state.editBeerAlc,
-      brewery: this.state.editBeerBrewery
+      name: this.state.editBeerName.length
+        ? this.state.editBeerName
+        : this.props.beer.name,
+      alcoholContent: this.state.editBeerAlc.length
+        ? this.state.editBeerAlc
+        : this.props.beer.alcoholContent,
+      brewery: this.state.editBeerBrewery.length
+        ? this.state.editBeerBrewery
+        : this.props.beer.brewery
     };
 
-    debugger;
-
-    let newBeers = this.state.beers.map(beer => {
-      if (beer.id === this.props.beer.id) {
-        return updatedBeer;
-      } else {
-        return beer;
-      }
-    });
-
-    this.setState({
-      beers: newBeers
-    });
+    this.props.handleEdit(updatedBeer);
   }
 
   render() {
     return (
       <Form onSubmit={this.handleEdit}>
-        <caption>Edit Beer</caption>
         <FormGroup>
           <Row>
             <Col sm="3">
@@ -57,7 +48,7 @@ class EditBeer extends Component {
                 type="text"
                 name="editBeerName"
                 id="editBeerName"
-                value={this.props.beer.name}
+                defaultValue={this.props.beer.name}
                 onChange={this.handleChange}
               />
             </Col>
@@ -73,7 +64,7 @@ class EditBeer extends Component {
                 type="text"
                 name="editBeerAlc"
                 id="editBeerAlc"
-                value={this.props.beer.alcoholContent}
+                defaultValue={this.props.beer.alcoholContent}
                 onChange={this.handleChange}
               />
             </Col>
@@ -89,7 +80,7 @@ class EditBeer extends Component {
                 type="text"
                 name="editBeerBrewery"
                 id="editBeerBrewery"
-                value={this.props.beer.brewery}
+                defaultValue={this.props.beer.brewery}
                 onChange={this.handleChange}
               />
             </Col>

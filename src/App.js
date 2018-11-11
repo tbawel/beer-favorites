@@ -41,7 +41,7 @@ class App extends Component {
       beerToEdit: {
         id: -1,
         name: "",
-        alcoholContent: 0,
+        alcoholContent: "",
         brewery: ""
       },
       newBeerName: "",
@@ -92,17 +92,9 @@ class App extends Component {
     });
   }
 
-  handleEdit(event) {
-    event.preventDefault();
-    let updatedBeer = {
-      id: this.state.editBeerId,
-      name: this.state.editBeerName,
-      alcoholContent: this.state.editBeerAlc,
-      brewery: this.state.editBeerBrewery
-    };
-
+  handleEdit(updatedBeer) {
     let newBeers = this.state.beers.map(beer => {
-      if (beer.id === this.state.editBeerId) {
+      if (beer.id === updatedBeer.id) {
         return updatedBeer;
       } else {
         return beer;
@@ -201,7 +193,11 @@ class App extends Component {
               </Form>
             </Col>
             <Col>
-              <EditBeer beer={this.state.beerToEdit} />
+              <h3>Edit Beer</h3>
+              <EditBeer
+                beer={this.state.beerToEdit}
+                handleEdit={this.handleEdit}
+              />
             </Col>
           </Row>
         </Container>
