@@ -1,3 +1,3 @@
 # Beer Favorites
 
-Simple one component version using reactStrap
+Using Adonis.js for API backend and Create React App for front-end
