@@ -1,0 +1,31 @@
+{
+  "name": "beer",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "mongodb": {
+    "collection": "beers"
+  },
+  "properties": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "alcoholContent": {
+      "type": "number",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {
+    "isCraftedBy": {
+      "type": "belongsTo",
+      "model": "brewery",
+      "foreignKey": "breweryId"
+    }
+  },
+  "acls": [],
+  "methods": {}
+}
