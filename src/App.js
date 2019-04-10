@@ -2,15 +2,19 @@ import React, { Component } from "react";
 import "./App.css";
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      beers: ["Choco Stout", "Blonde White", "Thunder Monkey"]
+    };
+  }
+
   render() {
+    const beersList = this.state.beers.map(beer => <li>{beer}</li>);
     return (
       <div>
         <h1>Georgie's Beer Favorites</h1>
-        <ul>
-          <li>Choco Stout</li>
-          <li>Blonde White</li>
-          <li>Thunder Monkey</li>
-        </ul>
+        <ul>{beersList}</ul>
       </div>
     );
   }
