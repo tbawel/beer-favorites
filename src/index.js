@@ -4,7 +4,20 @@ import "./index.css";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 
-const beers = ["Choco Stout", "Blonde White", "Thunder Monkey"];
+const beers = [
+  {
+    id: 0,
+    name: "Choco Stout"
+  },
+  {
+    id: 1,
+    name: "Blonde White"
+  },
+  {
+    id: 2,
+    name: "Thunder Monkey"
+  }
+];
 ReactDOM.render(<App beers={beers} />, document.getElementById("root"));
 
 // If you want your app to work offline and load faster, you can change
