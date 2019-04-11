@@ -25,7 +25,9 @@ class App extends Component {
   handleDelete = (beerId, e) => {
     e.preventDefault();
     const updatedBeerlist = this.state.beers.filter(beer => beer.id !== beerId);
-    this.state.beers = updatedBeerlist; // Console Warning: "Do not mutate state directly. Use setState()"
+    this.setState({
+      beers: updatedBeerlist
+    });
   };
 
   render() {
