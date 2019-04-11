@@ -2,14 +2,34 @@ import React, { Component } from "react";
 import "./App.css";
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      beers: [
+        {
+          id: 0,
+          name: "Choco Stout"
+        },
+        {
+          id: 1,
+          name: "Blonde White"
+        },
+        {
+          id: 2,
+          name: "Thunder Monkey"
+        }
+      ]
+    };
+  }
+
   handleDelete = (beerId, e) => {
     e.preventDefault();
-    const updatedBeerlist = this.props.beers.filter(beer => beer.id !== beerId);
-    this.props.beers = updatedBeerlist; // PROPS ARE READ-ONLY...WHAT NOW?!?
+    const updatedBeerlist = this.state.beers.filter(beer => beer.id !== beerId);
+    this.state.beers = updatedBeerlist; // Console Warning: "Do not mutate state directly. Use setState()"
   };
 
   render() {
-    const beersList = this.props.beers.map(beer => (
+    const beersList = this.state.beers.map(beer => (
       <li key={beer.id}>
         {beer.name}{" "}
         <a href="/" onClick={e => this.handleDelete(beer.id, e)}>
