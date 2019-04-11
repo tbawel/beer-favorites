@@ -2,16 +2,16 @@ import React, { Component } from "react";
 import "./App.css";
 
 class App extends Component {
-  handleDelete = e => {
+  handleDelete = (beerId, e) => {
     e.preventDefault();
-    // console.log('Delete Beer')
+    console.log(beerId);
   };
 
   render() {
     const beersList = this.props.beers.map(beer => (
       <li key={beer.id}>
         {beer.name}{" "}
-        <a href="/" onClick={this.handleDelete}>
+        <a href="/" onClick={e => this.handleDelete(beer.id, e)}>
           Delete
         </a>
       </li>
