@@ -4,7 +4,9 @@ import "./App.css";
 class App extends Component {
   render() {
     const beersList = this.props.beers.map(beer => (
-      <li key={beer.id}>{beer.name}</li>
+      <li key={beer.id}>
+        {beer.name} <a href="/">Delete</a>
+      </li>
     ));
     return (
       <div>
