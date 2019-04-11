@@ -4,7 +4,8 @@ import "./App.css";
 class App extends Component {
   handleDelete = (beerId, e) => {
     e.preventDefault();
-    console.log(beerId);
+    const updatedBeerlist = this.props.beers.filter(beer => beer.id !== beerId);
+    this.props.beers = updatedBeerlist; // PROPS ARE READ-ONLY...WHAT NOW?!?
   };
 
   render() {
