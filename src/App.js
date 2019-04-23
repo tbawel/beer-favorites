@@ -18,8 +18,11 @@ class App extends Component {
           id: 2,
           name: "Thunder Monkey"
         }
-      ]
+      ],
+      newBeerName: ""
     };
+
+    this.handleChange = this.handleChange.bind(this);
   }
 
   handleDelete = (beerId, e) => {
@@ -29,6 +32,12 @@ class App extends Component {
       beers: updatedBeerlist
     });
   };
+
+  handleChange(e) {
+    this.setState({
+      newBeerName: e.target.value
+    });
+  }
 
   render() {
     const beersList = this.state.beers.map(beer => (
@@ -47,7 +56,11 @@ class App extends Component {
         <form>
           <fieldset>
             <label>Name of Beer:</label>
-            <input type="text" value="" />
+            <input
+              type="text"
+              value={this.state.newBeerName}
+              onChange={this.handleChange}
+            />
           </fieldset>
           <input type="submit" value="Submit" />
         </form>
