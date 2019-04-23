@@ -37,6 +37,18 @@ class App extends Component {
     });
   }
 
+  handleSubmit(e) {
+    e.preventDefault();
+    let newBeers = this.state.beers.slice();
+    newBeers.push({
+      id: this.state.beers.length,
+      name: this.state.newBeerName
+    });
+    this.setState({
+      beers: newBeers
+    });
+  }
+
   render() {
     const beersList = this.state.beers.map(beer => (
       <li key={beer.id}>
@@ -51,7 +63,7 @@ class App extends Component {
         <h1>Georgie's Beer Favorites</h1>
         <ul>{beersList}</ul>
         <h3>Create New Beer</h3>
-        <form>
+        <form onSubmit={e => this.handleSubmit(e)}>
           <fieldset>
             <label>Name of Beer:</label>
             <input
