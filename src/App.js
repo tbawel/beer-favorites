@@ -39,13 +39,14 @@ class App extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    let newBeers = this.state.beers.slice();
-    newBeers.push({
-      id: this.state.beers.length,
-      name: this.state.newBeerName
-    });
     this.setState({
-      beers: newBeers
+      beers: [
+        ...this.state.beers,
+        {
+          id: this.state.beers.length,
+          name: this.state.newBeerName
+        }
+      ]
     });
   }
 
