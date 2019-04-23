@@ -21,8 +21,6 @@ class App extends Component {
       ],
       newBeerName: ""
     };
-
-    this.handleChange = this.handleChange.bind(this);
   }
 
   handleDelete = (beerId, e) => {
@@ -59,7 +57,7 @@ class App extends Component {
             <input
               type="text"
               value={this.state.newBeerName}
-              onChange={this.handleChange}
+              onChange={e => this.handleChange(e)}
             />
           </fieldset>
           <input type="submit" value="Submit" />
