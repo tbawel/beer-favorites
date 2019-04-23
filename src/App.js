@@ -19,6 +19,7 @@ class App extends Component {
           name: "Thunder Monkey"
         }
       ],
+      newBeerCounter: 3,
       newBeerName: ""
     };
   }
@@ -43,10 +44,11 @@ class App extends Component {
       beers: [
         ...this.state.beers,
         {
-          id: this.state.beers.length,
+          id: this.state.newBeerCounter,
           name: this.state.newBeerName
         }
-      ]
+      ],
+      newBeerCounter: this.state.newBeerCounter + 1
     });
   }
 
