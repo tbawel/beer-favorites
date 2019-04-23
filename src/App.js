@@ -43,6 +43,14 @@ class App extends Component {
       <div>
         <h1>Georgie's Beer Favorites</h1>
         <ul>{beersList}</ul>
+        <h3>Create New Beer</h3>
+        <form>
+          <fieldset>
+            <label>Name of Beer:</label>
+            <input type="text" value="" />
+          </fieldset>
+          <input type="submit" value="Submit" />
+        </form>
       </div>
     );
   }
