@@ -54,6 +54,19 @@ class App extends Component {
     });
   }
 
+  handleUpdate(e, beerId) {
+    const updatedBeerlist = this.state.beers.map(beer => {
+      if (beer.id === beerId) {
+        return { ...beer, name: e.target.value };
+      } else {
+        return { ...beer };
+      }
+    });
+    this.setState({
+      beers: updatedBeerlist
+    });
+  }
+
   handleSubmit(e) {
     e.preventDefault();
     this.setState({
@@ -71,7 +84,16 @@ class App extends Component {
   render() {
     const beersList = this.state.beers.map(beer => (
       <li key={beer.id} onClick={e => this.setEdit(e, beer.id)}>
-        {beer.edit ? <input type="text" value={beer.name} /> : beer.name}
+        {beer.edit ? (
+          <input
+            type="text"
+            name="editBeerName"
+            value={beer.name}
+            onChange={e => this.handleUpdate(e, beer.id)}
+          />
+        ) : (
+          beer.name
+        )}
         <a href="/" onClick={e => this.handleDelete(beer.id, e)}>
           Delete
         </a>
