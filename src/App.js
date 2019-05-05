@@ -32,13 +32,13 @@ class App extends Component {
     });
   };
 
-  handleChange(e) {
+  handleChange = e => {
     this.setState({
       newBeerName: e.target.value
     });
-  }
+  };
 
-  handleSubmit(e) {
+  handleSubmit = e => {
     e.preventDefault();
     this.setState({
       beers: [
@@ -50,7 +50,7 @@ class App extends Component {
       ],
       newBeerCounter: this.state.newBeerCounter + 1
     });
-  }
+  };
 
   render() {
     const beersList = this.state.beers.map(beer => (
