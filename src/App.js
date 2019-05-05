@@ -8,15 +8,18 @@ class App extends Component {
       beers: [
         {
           id: 0,
-          name: "Choco Stout"
+          name: "Choco Stout",
+          edit: true
         },
         {
           id: 1,
-          name: "Blonde White"
+          name: "Blonde White",
+          edit: false
         },
         {
           id: 2,
-          name: "Thunder Monkey"
+          name: "Thunder Monkey",
+          edit: false
         }
       ],
       newBeerCounter: 3,
@@ -55,10 +58,16 @@ class App extends Component {
   render() {
     const beersList = this.state.beers.map(beer => (
       <li key={beer.id}>
-        {beer.name}{" "}
-        <a href="/" onClick={e => this.handleDelete(beer.id, e)}>
-          Delete
-        </a>
+        {beer.edit ? (
+          <input type="text" value={beer.name} />
+        ) : (
+          <div>
+            {beer.name}
+            <a href="/" onClick={e => this.handleDelete(beer.id, e)}>
+              Delete
+            </a>
+          </div>
+        )}
       </li>
     ));
     return (
