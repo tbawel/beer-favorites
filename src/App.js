@@ -9,7 +9,7 @@ class App extends Component {
         {
           id: 0,
           name: "Choco Stout",
-          edit: true
+          edit: false
         },
         {
           id: 1,
@@ -26,6 +26,19 @@ class App extends Component {
       newBeerName: ""
     };
   }
+
+  setEdit = (e, beerId) => {
+    let newBeers = this.state.beers.map(beer => {
+      if (beer.id === beerId) {
+        return { ...beer, edit: true };
+      } else {
+        return { ...beer, edit: false };
+      }
+    });
+    this.setState({
+      beers: newBeers
+    });
+  };
 
   handleDelete = (beerId, e) => {
     e.preventDefault();
@@ -57,17 +70,11 @@ class App extends Component {
 
   render() {
     const beersList = this.state.beers.map(beer => (
-      <li key={beer.id}>
-        {beer.edit ? (
-          <input type="text" value={beer.name} />
-        ) : (
-          <div>
-            {beer.name}
-            <a href="/" onClick={e => this.handleDelete(beer.id, e)}>
-              Delete
-            </a>
-          </div>
-        )}
+      <li key={beer.id} onClick={e => this.setEdit(e, beer.id)}>
+        {beer.edit ? <input type="text" value={beer.name} /> : beer.name}
+        <a href="/" onClick={e => this.handleDelete(beer.id, e)}>
+          Delete
+        </a>
       </li>
     ));
     return (
