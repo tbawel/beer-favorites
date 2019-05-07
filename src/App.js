@@ -49,12 +49,6 @@ class App extends Component {
     });
   };
 
-  handleChange(e) {
-    this.setState({
-      newBeerName: e.target.value
-    });
-  }
-
   handleUpdate(e, beerId) {
     const updatedBeerlist = this.state.beers.map(beer => {
       if (beer.id === beerId) {
@@ -65,6 +59,13 @@ class App extends Component {
     });
     this.setState({
       beers: updatedBeerlist
+    });
+  }
+
+  handleChange(e) {
+    console.log();
+    this.setState({
+      newBeerName: e.target.value
     });
   }
 
@@ -104,7 +105,11 @@ class App extends Component {
       <div>
         <h1>Georgie's Beer Favorites</h1>
         <ul>{beersList}</ul>
-        <CreateBeer />
+        <CreateBeer
+          handleSubmit={e => this.handleSubmit(e)}
+          handleChange={e => this.handleChange(e)}
+          newBeerName={this.state.newBeerName}
+        />
       </div>
     );
   }
