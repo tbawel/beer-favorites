@@ -63,7 +63,6 @@ class App extends Component {
   }
 
   handleChange(e) {
-    console.log();
     this.setState({
       newBeerName: e.target.value
     });
