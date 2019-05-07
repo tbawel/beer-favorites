@@ -62,20 +62,14 @@ class App extends Component {
     });
   }
 
-  handleChange(e) {
-    this.setState({
-      newBeerName: e.target.value
-    });
-  }
-
-  handleSubmit(e) {
+  handleSubmit(e, newBeerName) {
     e.preventDefault();
     this.setState({
       beers: [
         ...this.state.beers,
         {
           id: this.state.newBeerCounter,
-          name: this.state.newBeerName
+          name: newBeerName
         }
       ],
       newBeerCounter: this.state.newBeerCounter + 1
@@ -104,11 +98,7 @@ class App extends Component {
       <div>
         <h1>Georgie's Beer Favorites</h1>
         <ul>{beersList}</ul>
-        <CreateBeer
-          handleSubmit={e => this.handleSubmit(e)}
-          handleChange={e => this.handleChange(e)}
-          newBeerName={this.state.newBeerName}
-        />
+        <CreateBeer handleSubmit={this.handleSubmit.bind(this)} />
       </div>
     );
   }
