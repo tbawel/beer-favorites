@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "./App.css";
+import CreateBeer from "./CreateBeer";
 
 class App extends Component {
   constructor(props) {
@@ -103,18 +104,7 @@ class App extends Component {
       <div>
         <h1>Georgie's Beer Favorites</h1>
         <ul>{beersList}</ul>
-        <h3>Create New Beer</h3>
-        <form onSubmit={e => this.handleSubmit(e)}>
-          <fieldset>
-            <label>Name of Beer:</label>
-            <input
-              type="text"
-              value={this.state.newBeerName}
-              onChange={e => this.handleChange(e)}
-            />
-          </fieldset>
-          <input type="submit" value="Submit" />
-        </form>
+        <CreateBeer />
       </div>
     );
   }
