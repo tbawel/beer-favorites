@@ -83,17 +83,19 @@ class App extends Component {
 
   render() {
     const beersList = this.state.beers.map(beer => (
-      <li key={beer.id} onClick={e => this.setEdit(e, beer.id)}>
-        {beer.edit ? (
-          <input
-            type="text"
-            name="editBeerName"
-            value={beer.name}
-            onChange={e => this.handleUpdate(e, beer.id)}
-          />
-        ) : (
-          beer.name
-        )}
+      <li key={beer.id}>
+        <span onClick={e => this.setEdit(e, beer.id)}>
+          {beer.edit ? (
+            <input
+              type="text"
+              name="editBeerName"
+              value={beer.name}
+              onChange={e => this.handleUpdate(e, beer.id)}
+            />
+          ) : (
+            beer.name
+          )}
+        </span>
         <a href="/" onClick={e => this.handleDelete(beer.id, e)}>
           Delete
         </a>
