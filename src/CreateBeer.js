@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link, withRouter } from "react-router-dom";
 import "./App.css";
 
 class CreateBeer extends Component {
@@ -17,6 +18,7 @@ class CreateBeer extends Component {
   render() {
     return (
       <div>
+        <h1>Create New Favorite</h1>
         <form
           onSubmit={e => this.props.handleSubmit(e, this.state.newBeerName)}
         >
@@ -28,11 +30,13 @@ class CreateBeer extends Component {
               onChange={e => this.handleChange(e)}
             />
           </fieldset>
-          <input type="submit" value="Submit" />
+          <Link to="/">
+            <input type="submit" value="Submit" />
+          </Link>
         </form>
       </div>
     );
   }
 }
 
-export default CreateBeer;
+export default withRouter(CreateBeer);

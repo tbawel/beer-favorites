@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import "./App.css";
+import BeerList from "./BeerList";
 import CreateBeer from "./CreateBeer";
+import { Link, Route, Switch, withRouter } from "react-router-dom";
 
 class App extends Component {
   constructor(props) {
@@ -63,6 +65,7 @@ class App extends Component {
   }
 
   handleSubmit(e, newBeerName) {
+    debugger;
     e.preventDefault();
     this.setState({
       beers: [
@@ -74,34 +77,32 @@ class App extends Component {
       ],
       newBeerCounter: this.state.newBeerCounter + 1
     });
+    //this.props.history.push("/");
   }
 
   render() {
-    const beersList = this.state.beers.map(beer => (
-      <li key={beer.id} onClick={e => this.setEdit(e, beer.id)}>
-        {beer.edit ? (
-          <input
-            type="text"
-            name="editBeerName"
-            value={beer.name}
-            onChange={e => this.handleUpdate(e, beer.id)}
-          />
-        ) : (
-          beer.name
-        )}
-        <a href="/" onClick={e => this.handleDelete(beer.id, e)}>
-          Delete
-        </a>
-      </li>
-    ));
     return (
       <div>
-        <h1>Georgie's Beer Favorites</h1>
-        <ul>{beersList}</ul>
-        <CreateBeer handleSubmit={this.handleSubmit.bind(this)} />
+        <Link to="/">Home</Link>
+        <br />
+        <Link to="/create-beer">Create Beer</Link>
+        <Switch>
+          <Route
+            exact
+            path="/"
+            render={props => <BeerList {...props} beers={this.state.beers} />}
+          />
+          <Route
+            exact
+            path="/create-beer"
+            render={props => (
+              <CreateBeer {...props} handleSubmit={e => this.handleSubmit(e)} />
+            )}
+          />
+        </Switch>
       </div>
     );
   }
 }
 
-export default App;
+export default withRouter(App);
