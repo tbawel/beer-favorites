@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "./App.css";
 import CreateBeer from "./CreateBeer";
+import BeerList from "./BeerList";
 
 class App extends Component {
   constructor(props) {
@@ -49,12 +50,13 @@ class App extends Component {
     });
   };
 
-  handleUpdate(e, beerId) {
+  handleUpdate(beerId, updateBeerName, e) {
+    e.preventDefault();
     const updatedBeerlist = this.state.beers.map(beer => {
       if (beer.id === beerId) {
-        return { ...beer, name: e.target.value };
+        return { ...beer, name: updateBeerName, edit: false };
       } else {
-        return { ...beer };
+        return { ...beer, edit: false };
       }
     });
     this.setState({
@@ -77,29 +79,15 @@ class App extends Component {
   }
 
   render() {
-    const beersList = this.state.beers.map(beer => (
-      <li key={beer.id}>
-        <span onClick={e => this.setEdit(e, beer.id)}>
-          {beer.edit ? (
-            <input
-              type="text"
-              name="editBeerName"
-              value={beer.name}
-              onChange={e => this.handleUpdate(e, beer.id)}
-            />
-          ) : (
-            beer.name
-          )}
-        </span>
-        <a href="/" onClick={e => this.handleDelete(beer.id, e)}>
-          Delete
-        </a>
-      </li>
-    ));
     return (
       <div>
         <h1>Georgie's Beer Favorites</h1>
-        <ul>{beersList}</ul>
+        <BeerList
+          beers={this.state.beers}
+          setEdit={this.setEdit.bind(this)}
+          handleDelete={this.handleDelete.bind(this)}
+          handleUpdate={this.handleUpdate.bind(this)}
+        />
         <CreateBeer handleSubmit={this.handleSubmit.bind(this)} />
       </div>
     );
