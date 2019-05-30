@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "./App.css";
+import DeleteBeer from "./DeleteBeer";
 
 class BeerList extends Component {
   constructor(props) {
@@ -40,9 +41,7 @@ class BeerList extends Component {
             Update
           </a>
         ) : (
-          <a href="/" onClick={e => this.props.handleDelete(beer.id, e)}>
-            Delete
-          </a>
+          <DeleteBeer beerId={beer.id} handleDelete={this.props.handleDelete} />
         )}
       </li>
     ));
